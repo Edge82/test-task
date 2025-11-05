@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="full-h">
-    <h1>Тестовое задание</h1>
+    <h1>{{ translations.title[currentLanguage] }}</h1>
 
     <MyCalendar v-model="selectedDate" :locale="currentLanguage"/>
     <div class="language-switcher">
@@ -20,7 +20,7 @@
       </button>
     </div>
 
-    <p>Выбранная дата: {{ selectedDate ? formatDate(selectedDate) : 'Дата не выбрана' }}</p>
+    <p>{{ selectedDate ? formatSelectedDateText(selectedDate) : translations.noDateSelected[currentLanguage] }}</p>
   </div>
 </template>
 
@@ -35,7 +35,21 @@ export default {
   data () {
     return {
       currentLanguage: 'ru',
-      selectedDate: null
+      selectedDate: null,
+      translations: {
+        title: {
+          ru: 'Тестовое задание',
+          en: 'Test Task'
+        },
+        selectedDate: {
+          ru: 'Выбранная дата:',
+          en: 'Selected date:'
+        },
+        noDateSelected: {
+          ru: 'Дата не выбрана',
+          en: 'No date selected'
+        }
+      }
     }
   },
   methods: {
@@ -45,6 +59,9 @@ export default {
       const month = (d.getMonth() + 1).toString().padStart(2, '0')
       const day = d.getDate().toString().padStart(2, '0')
       return `${year}.${month}.${day}`
+    },
+    formatSelectedDateText (date) {
+      return `${this.translations.selectedDate[this.currentLanguage]} ${this.formatDate(date)}`
     }
   }
 }

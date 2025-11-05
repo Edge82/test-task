@@ -2,6 +2,7 @@
   "name": "calendar",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://Edge82.github.io/calendar/",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
